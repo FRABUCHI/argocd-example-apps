@@ -12,6 +12,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: helm-hooks/frontend
+            name: frontend
             port:
               number: 80
