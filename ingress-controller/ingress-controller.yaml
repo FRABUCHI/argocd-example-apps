@@ -1,20 +1,17 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: test
-  namespace: ingress-nginx
+  name: ingress-controller
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  # - host: foo.bar.com
   - http:
-    paths:
-    - path: /
-      backend:
-        serviceName: helm/hooks/frontends
-        servicePort: 80
-    # - path: /bar
-    #   backend:
-    #     serviceName: svc2
-    #     servicePort: 80
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: helm-hooks/frontend
+            port:
+              number: 80
